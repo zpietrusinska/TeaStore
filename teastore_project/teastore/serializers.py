@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from rest_framework import serializers
 
 from .models import TeaCategory, Origin, Tea, Order, OrderItem
@@ -34,4 +35,15 @@ class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = "__all__"
-        read_only_fields = ["created_at"]
+        read_only_fields = ["created_at", "user"]
+
+
+class UserRegistrationSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+
+    class Meta:
+        model = User
+        fields = ["username", "password", "email", "first_name", "last_name"]
+
+    def create(self, validated_data):
+        return User.objects.create_user(**validated_data)
