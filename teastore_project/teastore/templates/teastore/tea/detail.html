@@ -1,0 +1,25 @@
+{% extends "teastore/base.html" %}
+
+{% block title %}Szczegoly herbaty{% endblock %}
+
+{% block content %}
+<h2>Szczegoly: {{ tea.name }}</h2>
+
+<div class="card">
+    <p><strong>Opis:</strong> {{ tea.description|default:"-" }}</p>
+    <p><strong>Kategoria:</strong> {{ tea.category }}</p>
+    <p><strong>Pochodzenie:</strong> {{ tea.origin|default:"-" }}</p>
+    <p><strong>Typ:</strong> {{ tea.get_tea_type_display }}</p>
+    <p><strong>Kofeina:</strong> {{ tea.get_caffeine_level_display }}</p>
+    <p><strong>Cena:</strong> {{ tea.price }}</p>
+    <p><strong>Stan:</strong> {{ tea.stock_qty }}</p>
+    <p><strong>Aktywna:</strong> {{ tea.is_active }}</p>
+    <p><strong>Dodano:</strong> {{ tea.added_at }}</p>
+</div>
+
+<form method="post" class="actions">
+    {% csrf_token %}
+    <a href="{% url 'tea-list-html' %}">Powrot</a>
+    <button type="submit">Usun</button>
+</form>
+{% endblock %}

@@ -1,22 +1,41 @@
 from django.urls import path
-from rest_framework.routers import DefaultRouter
 
 from .views import (
     register_user,
-    TeaCategoryViewSet,
-    OriginViewSet,
-    TeaViewSet,
-    OrderViewSet,
-    OrderItemViewSet,
+    teas_search,
+    orders_my,
+    tea_list,
+    tea_detail,
+    tea_update_delete,
+    category_list,
+    category_detail,
+    origin_list,
+    origin_detail,
+    order_list,
+    order_detail,
+    order_item_list,
+    order_item_detail,
+    tea_list_html,
+    tea_detail_html,
+    tea_create_html,
 )
-
-router = DefaultRouter()
-router.register(r"categories", TeaCategoryViewSet)
-router.register(r"origins", OriginViewSet)
-router.register(r"teas", TeaViewSet)
-router.register(r"orders", OrderViewSet)
-router.register(r"order-items", OrderItemViewSet)
 
 urlpatterns = [
     path("auth/register/", register_user, name="register-user"),
-] + router.urls
+    path("teas/", tea_list),
+    path("teas/<int:pk>/", tea_detail),
+    path("teas/update_delete/<int:pk>/", tea_update_delete),
+    path("categories/", category_list),
+    path("categories/<int:pk>/", category_detail),
+    path("origins/", origin_list),
+    path("origins/<int:pk>/", origin_detail),
+    path("orders/", order_list),
+    path("orders/<int:pk>/", order_detail),
+    path("order-items/", order_item_list),
+    path("order-items/<int:pk>/", order_item_detail),
+    path("teas/search/", teas_search, name="teas-search"),
+    path("orders/my/", orders_my, name="orders-my"),
+    path("html/teas/", tea_list_html, name="tea-list-html"),
+    path("html/teas/<int:id>/", tea_detail_html, name="tea-detail-html"),
+    path("html/teas/dodaj/", tea_create_html, name="tea-create-html"),
+]

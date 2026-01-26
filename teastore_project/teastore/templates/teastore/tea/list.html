@@ -1,0 +1,24 @@
+{% extends "teastore/base.html" %}
+
+{% block title %}Lista herbat{% endblock %}
+
+{% block content %}
+<h2>Herbaty w bazie</h2>
+{% if teas %}
+    {% for tea in teas %}
+        <div class="card">
+            <p><strong>Nazwa:</strong> {{ tea.name }}</p>
+            <p><strong>Kategoria:</strong> {{ tea.category }}</p>
+            <p><strong>Typ:</strong> {{ tea.get_tea_type_display }}</p>
+            <p><strong>Kofeina:</strong> {{ tea.get_caffeine_level_display }}</p>
+            <p><strong>Cena:</strong> {{ tea.price }}</p>
+            <p><strong>Stan:</strong> {{ tea.stock_qty }}</p>
+            <div class="actions">
+                <a href="{% url 'tea-detail-html' tea.id %}">Szczegoly</a>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>Brak herbat w bazie.</p>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,25 @@
+body {
+    background-color: lightskyblue;
+    font-family: Arial, sans-serif;
+}
+
+#header {
+    padding: 12px 0;
+    font-weight: bold;
+}
+
+#content {
+    max-width: 900px;
+}
+
+.card {
+    background: white;
+    padding: 12px 16px;
+    margin: 10px 0;
+    border-radius: 6px;
+}
+
+.actions a,
+.actions button {
+    margin-right: 8px;
+}
