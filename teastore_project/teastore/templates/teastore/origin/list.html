@@ -1,0 +1,22 @@
+{% extends "teastore/base.html" %}
+
+{% block title %}Pochodzenia{% endblock %}
+
+{% block content %}
+<h2>Pochodzenia herbat</h2>
+{% if origins %}
+    {% for origin in origins %}
+        <div class="card">
+            <p><strong>Kod kraju:</strong> {{ origin.country_code }}</p>
+            <p><strong>Region:</strong> {{ origin.region }}</p>
+            <p><strong>Plantacja:</strong> {{ origin.farm_name|default:"-" }}</p>
+            <p><strong>Bio:</strong> {{ origin.is_organic }}</p>
+            <div class="actions">
+                <a href="{% url 'origin-detail-html' origin.id %}">Szczegoly</a>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>Brak pochodzen w bazie.</p>
+{% endif %}
+{% endblock %}

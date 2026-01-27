@@ -1,0 +1,18 @@
+{% extends "teastore/base.html" %}
+
+{% block title %}Szczegoly pochodzenia{% endblock %}
+
+{% block content %}
+<h2>Pochodzenie: {{ origin.country_code }} - {{ origin.region }}</h2>
+
+<div class="card">
+    <p><strong>Plantacja:</strong> {{ origin.farm_name|default:"-" }}</p>
+    <p><strong>Bio:</strong> {{ origin.is_organic }}</p>
+</div>
+
+<form method="post" class="actions">
+    {% csrf_token %}
+    <a href="{% url 'origin-list-html' %}">Powrot</a>
+    <button type="submit">Usun</button>
+</form>
+{% endblock %}

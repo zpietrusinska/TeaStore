@@ -1,0 +1,21 @@
+{% extends "teastore/base.html" %}
+
+{% block title %}Szczegoly zamowienia{% endblock %}
+
+{% block content %}
+<h2>Zamowienie #{{ order.id }}</h2>
+
+<div class="card">
+    <p><strong>Uzytkownik:</strong> {{ order.user }}</p>
+    <p><strong>Status:</strong> {{ order.get_status_display }}</p>
+    <p><strong>Data utworzenia:</strong> {{ order.created_at }}</p>
+    <p><strong>Data dostawy:</strong> {{ order.delivery_date|default:"-" }}</p>
+    <p><strong>Notatka:</strong> {{ order.note|default:"-" }}</p>
+</div>
+
+<form method="post" class="actions">
+    {% csrf_token %}
+    <a href="{% url 'order-list-html' %}">Powrot</a>
+    <button type="submit">Usun</button>
+</form>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "teastore/base.html" %}
+
+{% block title %}Zamowienia{% endblock %}
+
+{% block content %}
+<h2>Zamowienia</h2>
+{% if orders %}
+    {% for order in orders %}
+        <div class="card">
+            <p><strong>ID:</strong> {{ order.id }}</p>
+            <p><strong>Uzytkownik:</strong> {{ order.user }}</p>
+            <p><strong>Status:</strong> {{ order.get_status_display }}</p>
+            <p><strong>Data utworzenia:</strong> {{ order.created_at }}</p>
+            <div class="actions">
+                <a href="{% url 'order-detail-html' order.id %}">Szczegoly</a>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>Brak zamowien w bazie.</p>
+{% endif %}
+{% endblock %}

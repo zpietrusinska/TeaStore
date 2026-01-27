@@ -1,0 +1,17 @@
+{% extends "teastore/base.html" %}
+
+{% block title %}Szczegoly kategorii{% endblock %}
+
+{% block content %}
+<h2>Kategoria: {{ category.name }}</h2>
+
+<div class="card">
+    <p><strong>Opis:</strong> {{ category.description|default:"-" }}</p>
+</div>
+
+<form method="post" class="actions">
+    {% csrf_token %}
+    <a href="{% url 'category-list-html' %}">Powrot</a>
+    <button type="submit">Usun</button>
+</form>
+{% endblock %}

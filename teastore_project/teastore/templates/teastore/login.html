@@ -1,0 +1,16 @@
+{% extends "teastore/base.html" %}
+
+{% block title %}Logowanie{% endblock %}
+
+{% block content %}
+<h2>Logowanie</h2>
+{% if error %}
+    <p style="color:red;">{{ error }}</p>
+{% endif %}
+<form method="post">
+    {% csrf_token %}
+    <p>Uzytkownik: <input type="text" name="username"></p>
+    <p>Haslo: <input type="password" name="password"></p>
+    <p><input type="submit" value="Zaloguj"></p>
+</form>
+{% endblock %}

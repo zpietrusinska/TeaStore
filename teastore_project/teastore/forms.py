@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Tea, TeaCategory, Origin
+from .models import Tea, TeaCategory, Origin, Order, OrderItem
 
 
 class TeaForm(forms.ModelForm):
@@ -19,3 +19,15 @@ class OriginForm(forms.ModelForm):
     class Meta:
         model = Origin
         fields = "__all__"
+
+
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = "__all__"
+
+
+class OrderItemForm(forms.ModelForm):
+    class Meta:
+        model = OrderItem
+        exclude = ["unit_price"]

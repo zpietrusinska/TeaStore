@@ -1,0 +1,22 @@
+{% extends "teastore/base.html" %}
+
+{% block title %}Dodaj pochodzenie{% endblock %}
+
+{% block content %}
+<h2>Dodaj nowe pochodzenie</h2>
+
+{% if form.errors %}
+    <div class="card">
+        {{ form.errors }}
+    </div>
+{% endif %}
+
+<form method="post" class="card">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="actions">
+        <button type="submit">Zapisz</button>
+        <a href="{% url 'origin-list-html' %}">Anuluj</a>
+    </div>
+</form>
+{% endblock %}

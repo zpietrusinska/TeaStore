@@ -10,7 +10,26 @@
             TeaStore - proste widoki HTML
             <span class="actions">
                 <a href="{% url 'tea-list-html' %}">Lista herbat</a>
-                <a href="{% url 'tea-create-html' %}">Dodaj herbate</a>
+                {% if user.is_staff or user.is_superuser %}
+                    <a href="{% url 'tea-create-html' %}">Dodaj herbate</a>
+                {% endif %}
+                <a href="{% url 'category-list-html' %}">Kategorie</a>
+                {% if user.is_staff or user.is_superuser %}
+                    <a href="{% url 'category-create-html' %}">Dodaj kategorie</a>
+                {% endif %}
+                <a href="{% url 'origin-list-html' %}">Pochodzenia</a>
+                {% if user.is_staff or user.is_superuser %}
+                    <a href="{% url 'origin-create-html' %}">Dodaj pochodzenie</a>
+                {% endif %}
+                <a href="{% url 'order-list-html' %}">Zamowienia</a>
+                <a href="{% url 'order-create-html' %}">Dodaj zamowienie</a>
+                <a href="{% url 'order-item-list-html' %}">Pozycje zamowien</a>
+                <a href="{% url 'order-item-create-html' %}">Dodaj pozycje zamowienia</a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'user-logout' %}">Wyloguj</a>
+                {% else %}
+                    <a href="{% url 'user-login' %}">Zaloguj</a>
+                {% endif %}
             </span>
         </div>
         <hr/>

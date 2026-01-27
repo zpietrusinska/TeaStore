@@ -1,0 +1,22 @@
+{% extends "teastore/base.html" %}
+
+{% block title %}Pozycje zamowien{% endblock %}
+
+{% block content %}
+<h2>Pozycje zamowien</h2>
+{% if items %}
+    {% for item in items %}
+        <div class="card">
+            <p><strong>Zamowienie:</strong> {{ item.order }}</p>
+            <p><strong>Herbata:</strong> {{ item.tea }}</p>
+            <p><strong>Ilosc:</strong> {{ item.quantity }}</p>
+            <p><strong>Cena jednostkowa:</strong> {{ item.unit_price }}</p>
+            <div class="actions">
+                <a href="{% url 'order-item-detail-html' item.id %}">Szczegoly</a>
+            </div>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>Brak pozycji w bazie.</p>
+{% endif %}
+{% endblock %}
