@@ -20,6 +20,8 @@
 <form method="post" class="actions">
     {% csrf_token %}
     <a href="{% url 'tea-list-html' %}">Powrot</a>
-    <button type="submit">Usun</button>
+    {% if user.is_staff or user.is_superuser %}
+        <button type="submit">Usun</button>
+    {% endif %}
 </form>
 {% endblock %}

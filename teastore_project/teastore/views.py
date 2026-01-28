@@ -12,7 +12,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 
 from .forms import TeaForm, TeaCategoryForm, OriginForm, OrderForm, OrderItemForm
-from .models import TeaCategory, Origin, Tea, Order, OrderItem
+from .models import TeaCategory, Origin, Tea, Order, OrderItem, OrderStatus
 from .serializers import (
     TeaCategorySerializer,
     OriginSerializer,
@@ -574,6 +574,9 @@ def order_create_html(request):
         form = OrderForm(request.POST)
         if not (request.user.is_staff or request.user.is_superuser):
             form.instance.user = request.user
+            form.instance.status = OrderStatus.NEW
+            if "status" in form.fields:
+                form.fields.pop("status")
         if form.is_valid():
             form.save()
             return redirect("order-list-html")
@@ -581,6 +584,7 @@ def order_create_html(request):
         form = OrderForm()
         if not (request.user.is_staff or request.user.is_superuser):
             form.fields["user"].queryset = form.fields["user"].queryset.filter(id=request.user.id)
+            form.fields.pop("status", None)
 
     return render(request, "teastore/order/create.html", {"form": form})
 
