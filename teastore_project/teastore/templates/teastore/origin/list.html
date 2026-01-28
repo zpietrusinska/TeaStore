@@ -10,7 +10,7 @@
             <p><strong>Kod kraju:</strong> {{ origin.country_code }}</p>
             <p><strong>Region:</strong> {{ origin.region }}</p>
             <p><strong>Plantacja:</strong> {{ origin.farm_name|default:"-" }}</p>
-            <p><strong>Bio:</strong> {{ origin.is_organic }}</p>
+            <p><strong>Bio:</strong> {{ origin.is_organic|yesno:"Tak,Nie" }}</p>
             <div class="actions">
                 <a href="{% url 'origin-detail-html' origin.id %}">Szczegoly</a>
             </div>

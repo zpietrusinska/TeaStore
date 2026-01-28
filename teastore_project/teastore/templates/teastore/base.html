@@ -13,12 +13,10 @@
                 {% if user.is_staff or user.is_superuser %}
                     <a href="{% url 'tea-create-html' %}">Dodaj herbate</a>
                 {% endif %}
-                <a href="{% url 'category-list-html' %}">Kategorie</a>
                 {% if user.is_staff or user.is_superuser %}
+                    <a href="{% url 'category-list-html' %}">Kategorie</a>
                     <a href="{% url 'category-create-html' %}">Dodaj kategorie</a>
-                {% endif %}
-                <a href="{% url 'origin-list-html' %}">Pochodzenia</a>
-                {% if user.is_staff or user.is_superuser %}
+                    <a href="{% url 'origin-list-html' %}">Pochodzenia</a>
                     <a href="{% url 'origin-create-html' %}">Dodaj pochodzenie</a>
                 {% endif %}
                 <a href="{% url 'order-list-html' %}">Zamowienia</a>

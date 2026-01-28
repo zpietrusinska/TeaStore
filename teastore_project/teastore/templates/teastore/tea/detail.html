@@ -13,7 +13,7 @@
     <p><strong>Kofeina:</strong> {{ tea.get_caffeine_level_display }}</p>
     <p><strong>Cena:</strong> {{ tea.price }}</p>
     <p><strong>Stan:</strong> {{ tea.stock_qty }}</p>
-    <p><strong>Aktywna:</strong> {{ tea.is_active }}</p>
+    <p><strong>Aktywna:</strong> {{ tea.is_active|yesno:"Tak,Nie" }}</p>
     <p><strong>Dodano:</strong> {{ tea.added_at }}</p>
 </div>
 

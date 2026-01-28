@@ -6,8 +6,10 @@
 <h2>Pochodzenie: {{ origin.country_code }} - {{ origin.region }}</h2>
 
 <div class="card">
+    <p><strong>Kod kraju:</strong> {{ origin.country_code }}</p>
+    <p><strong>Region:</strong> {{ origin.region }}</p>
     <p><strong>Plantacja:</strong> {{ origin.farm_name|default:"-" }}</p>
-    <p><strong>Bio:</strong> {{ origin.is_organic }}</p>
+    <p><strong>Bio:</strong> {{ origin.is_organic|yesno:"Tak,Nie" }}</p>
 </div>
 
 <form method="post" class="actions">

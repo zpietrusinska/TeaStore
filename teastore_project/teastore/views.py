@@ -460,6 +460,8 @@ def tea_create_html(request):
 
 @login_required(login_url="/api/login/")
 def category_list_html(request):
+    if not (request.user.is_staff or request.user.is_superuser):
+        raise Http404("Brak uprawnien do listy kategorii.")
     categories = TeaCategory.objects.all()
     return render(request, "teastore/category/list.html", {"categories": categories})
 
@@ -500,6 +502,8 @@ def category_create_html(request):
 
 @login_required(login_url="/api/login/")
 def origin_list_html(request):
+    if not (request.user.is_staff or request.user.is_superuser):
+        raise Http404("Brak uprawnien do listy pochodzen.")
     origins = Origin.objects.all()
     return render(request, "teastore/origin/list.html", {"origins": origins})
 
@@ -557,7 +561,13 @@ def order_detail_html(request, id):
     if request.method == "GET":
         if not (request.user.is_staff or request.user.is_superuser) and order.user != request.user:
             raise Http404("Brak dostepu do zamowienia.")
-        return render(request, "teastore/order/detail.html", {"order": order})
+        items = OrderItem.objects.filter(order=order)
+        total_price = sum((item.unit_price * item.quantity) for item in items)
+        return render(
+            request,
+            "teastore/order/detail.html",
+            {"order": order, "items": items, "total_price": total_price},
+        )
 
     if request.method == "POST":
         if not (request.user.is_staff or request.user.is_superuser):
