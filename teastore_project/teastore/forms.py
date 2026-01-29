@@ -24,7 +24,7 @@ class OriginForm(forms.ModelForm):
 class OrderForm(forms.ModelForm):
     class Meta:
         model = Order
-        fields = "__all__"
+        exclude = ["delivery_date"]
 
 
 class OrderItemForm(forms.ModelForm):

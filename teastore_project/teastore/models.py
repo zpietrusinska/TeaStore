@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.validators import MinValueValidator
 from django.db import models
 
 
@@ -52,7 +53,12 @@ class Tea(models.Model):
     caffeine_level = models.CharField(
         max_length=10, choices=CaffeineLevel.choices, verbose_name="Poziom kofeiny"
     )
-    price = models.DecimalField(max_digits=8, decimal_places=2, verbose_name="Cena")
+    price = models.DecimalField(
+        max_digits=8,
+        decimal_places=2,
+        verbose_name="Cena",
+        validators=[MinValueValidator(0.01)],
+    )
     stock_qty = models.PositiveIntegerField(default=0, verbose_name="Stan magazynowy")
     is_active = models.BooleanField(default=True, verbose_name="Aktywna")
     added_at = models.DateField(auto_now_add=True, verbose_name="Data dodania")
@@ -96,7 +102,10 @@ class OrderItem(models.Model):
     tea = models.ForeignKey(Tea, on_delete=models.PROTECT, verbose_name="Herbata")
     quantity = models.PositiveIntegerField(verbose_name="Ilosc")
     unit_price = models.DecimalField(
-        max_digits=8, decimal_places=2, verbose_name="Cena jednostkowa"
+        max_digits=8,
+        decimal_places=2,
+        verbose_name="Cena jednostkowa",
+        validators=[MinValueValidator(0.01)],
     )
 
     class Meta:

@@ -7,7 +7,8 @@
     </head>
     <body>
         <div id="header">
-            TeaStore - proste widoki HTML
+            <p>TeaStore - najlepsze herbaty online!</p>
+            <p>
             <span class="actions">
                 <a href="{% url 'tea-list-html' %}">Lista herbat</a>
                 {% if user.is_staff or user.is_superuser %}
@@ -28,7 +29,7 @@
                 {% else %}
                     <a href="{% url 'user-login' %}">Zaloguj</a>
                 {% endif %}
-            </span>
+            </span></p>
         </div>
         <hr/>
         <div id="content">
